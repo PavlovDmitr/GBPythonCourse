@@ -7,8 +7,9 @@ from task2 import insertNumberN
 
 def main():
     print('Программа выводит в результате работы число ПИ с точностью D')
-    d = insertNumberN('Пожалуйста введите D: ')
-    res = float(str(math.pi)[:d+2])
+    d = input('Пожалуйста введите маску D: ')
+    d = len(d[d.find('.')::])
+    res = float(str(math.pi)[:d+1])
     print(res)
     
 if __name__=='__main__':

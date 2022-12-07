@@ -17,13 +17,13 @@ def main():
     i = 2
     while n > 1:
         if n%i == 0:
-            if result.count(i) < 1:
-                result.append(i)
+            #if result.count(i) < 1: # до того как узнал про set
+            result.append(i)
             n = n/i
         else: 
             i = i + 1
-    print(f'список простых множетелей - {result}')
-            
+    print(f'список простых множетелей всех - {result}')
+    print(f'список простых множетелей уникальных - {list(set(result))}')       
 
 if __name__ == '__main__':
     main()

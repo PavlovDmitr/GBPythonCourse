@@ -1,11 +1,14 @@
 # Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл многочлен степени k.
+
 # Пример:
+
 # - k=2 => 2*x² + 4*x + 5 = 0 или x² + 5⁵ = 0 или 10*x² = 0  ""
+
 
 import os
 import random
-simbols = "  ²³⁴⁵⁶⁷⁸⁹"
 
+simbols = "  ²³⁴⁵⁶⁷⁸⁹"
 
 def insertNumberN(welcom_string: str):
     while True:
@@ -60,30 +63,40 @@ def write_file(file_path: str, lines: str):
         return False
 
 
-def main(file_path_end = r'res\task4_output.txt'):
+def create_polynom(n, lst):
+    result_str = ''
+    result_str_py = ''
+    for i in range( n ):
+        if lst[i] != 0:
+            if n<10:
+                result_str += (f'{lst[i]}x{simbols[n-i]} + ')
+            else:
+                result_str += (f'{lst[i]}x**{n-i} + ')
+            result_str_py += (f'{lst[i]}x**{n-i} + ')
+    if lst[n] == 0:
+        result_str += (f' = 0')
+        result_str_py += (f' = 0')
+    else:
+        result_str += (f'{lst[n]} = 0')
+        result_str_py += (f'{lst[n]} = 0')
+    return result_str, result_str_py
+
+
+def main(file_path_end = r'res/task4_output.txt'):
     koef_min = 0
     koef_max = 100
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(''' Программа принимает на вход число N,
     создает спискок от (-N до N), на основе этого списка
     создает многочлен степени N'''.replace('   ', ''))
     n = insertNumberN('Введите номер степени N: ')
 
-    lst = generate_list(n + 2, koef_min, koef_max, True, False)
-    os.system('cls' if os.name == 'nt' else 'clear')
+    lst = generate_list(n + 1, koef_min, koef_max, True, False)
+    
     print(f'Получившийся список - {lst}')
     scrpt_dir = os.path.dirname(__file__)
     file_path = os.path.join(scrpt_dir, file_path_end)
-    result_str = ''
-    result_str_py = ''
-    
-    for i in range( n + 1):
-        if n<9:
-            result_str = result_str + (f'{lst[i]}x{simbols[n-i+1]} + ')
-        else:
-            result_str = result_str + (f'{lst[i]}x**{n-i+1} + ')
-        result_str_py = result_str_py + (f'{lst[i]}x**{n-i+1} + ')
-    result_str = result_str + (f'{lst[n+1]} = 0')
-    result_str_py = result_str_py + (f'{lst[n+1]} = 0')
+    result_str, result_str_py = create_polynom(n, lst)
     print(result_str)
     file_exist = write_file(file_path, result_str_py)
 
