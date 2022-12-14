@@ -4,7 +4,6 @@
 
 # - k=2 => 2*x² + 4*x + 5 = 0 или x² + 5⁵ = 0 или 10*x² = 0  ""
 
-
 import os
 import random
 
@@ -19,7 +18,6 @@ def insertNumberN(welcom_string: str):
             print('введите число цифрами без других символов')
     return n
 
-
 def generate_list(long: int, start: int, stop: int, is_random: bool, is_real: bool):
     '''
     Создает спискок с кол-ом элементов {long},
@@ -27,18 +25,21 @@ def generate_list(long: int, start: int, stop: int, is_random: bool, is_real: bo
     при условии {is_random}.
     флаг {is_real} позволит создать список вещественных чисел.
     '''
-    lst = list()
+    lst = [item for item in range(long)]
     if is_random:
-        for a in range(long):
-            if is_real:
-                lst.append(round(random.randint(
-                    start, stop) + random.random(), 2))
-            else:
-                lst.append(random.randint(start, stop))
-    else:
-        lst = list(a for a in range(start, stop))
+         lst = [random.randint(start, stop) for item in lst]
+    if is_real:
+         lst = [round(item+random.random(),2) for item in lst]
+    # if is_random:
+    #     for a in range(long):
+    #         if is_real:
+    #             lst.append(round(random.randint(
+    #                 start, stop) + random.random(), 2))
+    #         else:
+    #             lst.append(random.randint(start, stop))
+    # else:
+    #     random.shuffle(lst)
     return lst
-
 
 def write_file(file_path: str, lines: str):
     exist = False
@@ -62,7 +63,6 @@ def write_file(file_path: str, lines: str):
         print('Ошибка создания файла')
         return False
 
-
 def create_polynom(n, lst):
     result_str = ''
     result_str_py = ''
@@ -80,6 +80,8 @@ def create_polynom(n, lst):
         result_str += (f'{lst[n]} = 0')
         result_str_py += (f'{lst[n]} = 0')
     return result_str, result_str_py
+# НАЧАЛО НОВОЙ ВЕРСИИ
+#'''--------------------------------------------------------------------'''
 
 def create_member(lst: list):
     if lst[1] !=0 and lst[0] != 0 and lst[1] != 1:
@@ -97,6 +99,10 @@ def create_polynom_new(lst: list):
     result = (' + '.join(filter(lambda x: x != 0, map(create_member, lst))))
     return f'{result} = 0'
 
+#  КОНЕЦ НОВОЙ ВЕРСИИ
+#'''------------------------------------------------------------------------'''
+
+
 def main(file_path_end = r'res/task4_output.txt'):
     koef_min = 0
     koef_max = 100
@@ -106,7 +112,7 @@ def main(file_path_end = r'res/task4_output.txt'):
     создает многочлен степени N'''.replace('   ', ''))
     n = insertNumberN('Введите номер степени N: ')
 
-    lst = generate_list(n + 1, koef_min, koef_max, True, False)
+    lst = generate_list(n + 1, koef_min, koef_max, True, True)
     
     print(f'Получившийся список - {lst}')
     scrpt_dir = os.path.dirname(__file__)

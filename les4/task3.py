@@ -8,6 +8,6 @@ def main():
         if res.count(int(item1)) == 0:
             res.append(int(item1))
     print(f'Последовательность неповторяющихся элементов {res}')
-    
+
 if __name__=='__main__':
     main()
