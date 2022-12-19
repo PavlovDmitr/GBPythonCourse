@@ -10,11 +10,12 @@ def search_f_base(data_search):
         f = False
         for line in data:
             if line.find(';'.join(data_search)) > -1:
-                data_return.append(line.replace('\n', '').split(';'))
+                print(line)
+                data_return.append(line.replace('\n', ''))
                 f = True
         if not f:
-            return('Совпадений не найдено')
-    else: data_return
+            return('Совпадений не найдено',)
+        else: return data_return
 
 def del_data_in_file(data: str):
     f = False
@@ -28,7 +29,7 @@ def del_data_in_file(data: str):
                 file_lines.remove(line)
                 print(line)
                 f = True
-        write_to_file('\n'.join(file_lines), mode='w')
+        write_to_file(file_lines, mode='w')
     if f:
         return True
 
@@ -39,7 +40,7 @@ def button_click():
             while True:
                 data = insert_data_base_view()
                 if data[0] != 'нет' and data[1] != 'нет' and data[2] != 'нет':
-                    write_to_file(';'.join(data))
+                    write_to_file(data)
                     write_log('Добавлена запись')
                 else: break
         elif choice == '2':
@@ -56,5 +57,11 @@ def button_click():
                 print('Совпадений не найдено')
             input()
         elif choice == '4':
+            lines = read_from_file()
+            lines_out = [' '.join(line.split(';')) for line in lines]
+            print(lines)
+            print(lines_out)
+            write_to_file(lines_out, mode='w', base_name=r'.\base\output.txt')
+            write_log('Создан файл ТХТ')
+        elif choice == '5':
             break
-

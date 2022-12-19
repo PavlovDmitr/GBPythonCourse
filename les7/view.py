@@ -18,10 +18,12 @@ def main_screen_view():
         1. Добавление записей.
         2. Поиск записей или вывод всех записей.
         3. Удаление записей.
-        4. Выход из программы
+        4. Импорт в текстовом формате
+        5. Выход из программы
         Выберите один из пунктов: '''.replace('    ', ' '))
+        lst = ['1', '2', '3', '4', '5']
         choice = input("> ")
-        if choice == '1' or choice == '2' or choice == '3' or choice == '4':
+        if lst.count(choice) == 1:
             return choice
         else:
             os.system('cls' if os.name == 'nt' else 'clear') 
