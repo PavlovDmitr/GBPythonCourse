@@ -6,15 +6,9 @@ from view import print_base as print
 def write_to_file(data, mode = 'a', base_name = r'.\base\base.csv'):
     scrpt_dir = os.path.dirname(__file__)
     base_name = os.path.join(scrpt_dir, base_name)
-    print(base_name.split("\\")[-1].split('.')[-1])
-    input()
     if base_name.split("\\")[-1].split('.')[-1] == 'csv':
         separator = ';'
     else: separator = ' '
-    print(separator)
-    input()
-    if type(data) == str:
-        data = [data,]
     try:
         with open(base_name, mode, encoding="utf-8") as file:
             for line in data:

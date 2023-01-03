@@ -59,8 +59,8 @@ def button_click():
         elif choice == '4':
             lines = read_from_file()
             lines_out = [' '.join(line.split(';')) for line in lines]
-            print(lines)
-            print(lines_out)
+            # print(lines)
+            # print(lines_out)
             write_to_file(lines_out, mode='w', base_name=r'.\base\output.txt')
             write_log('Создан файл ТХТ')
         elif choice == '5':
