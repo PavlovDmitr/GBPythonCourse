@@ -7,22 +7,9 @@ BASE = 'base.csv'
 def export_base(data: list[str], format: str, file_name = 'import'):
     if not os.path.exists('import'):
         os.mkdir('import')
-    # if format == '1':
     data = model.export_format(data, format)
     data = {'path': 'import/{}.{}'.format(file_name.lower(), format.lower()), 'text':data}
     file_manager.write_new_file(data)
-    # if format == '2':
-    #     data = model.export_format(data, 'CSV')
-    #     data = {'path': 'import/import.csv', 'text':data}
-    #     file_manager.write_new_file(data)
-    # if format == '3':
-    #     data = model.export_format(data, 'JSON')
-    #     data = {'path': 'import/import.json', 'text':data}
-    #     file_manager.write_new_file(data)
-    # if format == '4':
-    #     data = model.export_format(data, 'XML')
-    #     data = {'path': 'import/import.xml', 'text':data}
-    #     file_manager.write_new_file(data) 
 
 def main():
     scrpt_dir = os.path.dirname(__file__)
